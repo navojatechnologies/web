@@ -17,7 +17,6 @@ export default function PracticeCarousel() {
   const panel = useRef(null);
   const touchStart = useRef(null);
   const [active, setActive] = useState(0);
-  const scrollEnabled = useRef(false);
   const geometry = useCallback(() => {
     if (!section.current || !panel.current) return null;
     const top = section.current.getBoundingClientRect().top + window.scrollY;
@@ -26,31 +25,29 @@ export default function PracticeCarousel() {
     return { start: top - offset, travel: Math.max(0, section.current.offsetHeight - panel.current.offsetHeight) };
   }, []);
   const sync = useCallback(() => {
-    if (!scrollEnabled.current) return;
     const position = geometry();
     if (!position || position.travel <= 0) return;
     const progress = Math.max(0, Math.min(0.9999, (window.scrollY - position.start) / position.travel));
     setActive(Math.min(services.length - 1, Math.floor(progress * services.length)));
   }, [geometry]);
   useEffect(() => {
-    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
     let frame = 0;
-    const updateMode = () => { scrollEnabled.current = !media.matches; sync(); };
     const schedule = () => { cancelAnimationFrame(frame); frame = requestAnimationFrame(sync); };
-    const observer = new ResizeObserver(schedule);
-    if (section.current) observer.observe(section.current);
-    if (panel.current) observer.observe(panel.current);
-    updateMode();
-    media.addEventListener('change', updateMode);
+    // ResizeObserver is optional: scroll, resize and orientation events still keep
+    // the carousel in sync on older mobile browsers.
+    const observer = typeof ResizeObserver !== 'undefined' ? new ResizeObserver(schedule) : null;
+    if (section.current) observer?.observe(section.current);
+    if (panel.current) observer?.observe(panel.current);
     window.addEventListener('scroll', schedule, { passive: true });
     window.addEventListener('resize', schedule);
+    window.addEventListener('orientationchange', schedule);
     window.visualViewport?.addEventListener('resize', schedule);
-    return () => { media.removeEventListener('change', updateMode); window.removeEventListener('scroll', schedule); window.removeEventListener('resize', schedule); window.visualViewport?.removeEventListener('resize', schedule); observer.disconnect(); cancelAnimationFrame(frame); };
+    schedule();
+    return () => { window.removeEventListener('scroll', schedule); window.removeEventListener('resize', schedule); window.removeEventListener('orientationchange', schedule); window.visualViewport?.removeEventListener('resize', schedule); observer?.disconnect(); cancelAnimationFrame(frame); };
   }, [sync]);
   function select(index) {
     const next = Math.max(0, Math.min(services.length - 1, index));
     setActive(next);
-    if (!scrollEnabled.current) return;
     const position = geometry();
     if (position && position.travel > 0) window.scrollTo({ top: position.start + position.travel * (next + 0.5) / services.length, behavior: 'auto' });
   }
