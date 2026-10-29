@@ -11,6 +11,7 @@ const visuals = [
   { image: '/images/practices/product.jpg', label: 'PRODUCT / FROM IDEA TO IMPACT' },
   { image: '/images/practices/design.jpg', label: 'DESIGN / HUMAN-CENTRED THINKING' },
   { image: '/images/practices/cloud.jpg', label: 'CLOUD / BUILT TO EVOLVE' },
+  { image: '/images/hero-factory.jpg', label: 'AUTOMATION / CONNECTED WORKFLOWS' },
 ];
 export default function PracticeCarousel() {
   const section = useRef(null);

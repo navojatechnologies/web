@@ -32,6 +32,7 @@ export function Footer() {
   }
   const practiceLinks = [
     ['AI & intelligent systems', '/services/ai-intelligent-systems/'],
+    ['AI automation & workflows', '/services/ai-automation/'],
     ['Digital product engineering', '/services/digital-product-engineering/'],
     ['Enterprise modernization', '/services/modernization-cloud/'],
     ['Digital customer experience', '/services/experience-design/'],
