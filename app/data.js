@@ -14,3 +14,36 @@ export const industries = [
   {slug:'education', title:'Education', description:'Bring learning and administration together through accessible digital experiences.'},
   {slug:'manufacturing', title:'Manufacturing', description:'Connect people, processes, and information with practical digital tools.'},
 ];
+
+export const engineering = [
+  {slug:'ai-engineering',title:'AI engineering',description:'Bring intelligent features and workflows into digital products with a practical, considered approach.',focus:['AI integrations','Intelligent workflows','Data-informed experiences','AI product strategy']},
+  {slug:'full-stack-engineering',title:'Full stack engineering',description:'Connect thoughtful front-end experiences with reliable back-end systems.',focus:['Application architecture','Front-end development','Back-end development','Integration']},
+  {slug:'mobile-engineering',title:'Mobile engineering',description:'Create mobile applications designed around the needs of your users and your business.',focus:['iOS and Android','Cross-platform development','Mobile experience design','App evolution']},
+  {slug:'web-engineering',title:'Web engineering',description:'Build responsive, accessible websites and web applications designed to grow with you.',focus:['Web applications','Responsive websites','Commerce experiences','Performance']},
+  {slug:'backend-engineering',title:'Backend engineering',description:'Build the services, APIs, and data foundations that support your digital products.',focus:['API development','Application services','Data integration','System architecture']},
+  {slug:'devops-engineering',title:'DevOps engineering',description:'Improve the way software moves from development to delivery and ongoing operation.',focus:['Delivery workflows','Cloud infrastructure','Automation','Observability']},
+  {slug:'ui-ux-engineering',title:'UI/UX engineering',description:'Connect design and engineering to make digital products intuitive and consistent.',focus:['Interface engineering','Responsive experiences','Accessibility','Design systems']},
+  {slug:'design-engineering',title:'Design engineering',description:'Turn product ideas into coherent experiences through design and technical craft.',focus:['Experience strategy','Interaction design','Prototyping','Design systems']},
+  {slug:'qa-engineering',title:'QA engineering',description:'Make quality part of the product process, from early decisions through release.',focus:['Quality strategy','Functional testing','Test planning','Release readiness']},
+  {slug:'iot-engineering',title:'IoT engineering',description:'Explore connected experiences that bring devices, data, and software together.',focus:['Connected experiences','Device data','Application integration','IoT product planning']},
+  {slug:'business-analysis',title:'Business analysis',description:'Clarify needs, align stakeholders, and turn complex challenges into an actionable direction.',focus:['Discovery','Requirements','Process mapping','Product planning']},
+];
+industries.push(
+  {slug:'media-entertainment',title:'Media & entertainment',description:'Create engaging digital experiences for audiences, creators, and media teams.'},
+  {slug:'gaming',title:'Gaming',description:'Explore interactive experiences and digital platforms for gaming communities.'},
+  {slug:'hiring',title:'Hiring',description:'Make recruiting journeys and workforce workflows more intuitive.'},
+  {slug:'hospitality',title:'Hospitality',description:'Design connected experiences that help hospitality businesses serve their guests.'},
+);
+export const insights = [
+ {slug:'case-studies',title:'Case studies',description:'Explore how thoughtful product strategy and engineering can address business challenges.',body:'Every engagement has its own context. We share project stories when there is a clear opportunity to explain the challenge, the approach, and the outcome with the right permission.'},
+ {slug:'blogs',title:'Blogs',description:'Perspectives on technology, design, and building better digital products.',body:'From product discovery to engineering decisions, our perspectives focus on making technology useful and understandable.'},
+ {slug:'guides',title:'Guides',description:'Practical starting points for navigating digital product decisions.',body:'A good guide starts with the question you are trying to answer. We help teams think through discovery, design, delivery, and the choices that connect them.'},
+ {slug:'magazines',title:'Magazines',description:'A space for collected perspectives from the world of digital products.',body:'Explore ideas across design, technology, and the changing ways people use digital products.'},
+ {slug:'events',title:'Events',description:'Conversations and opportunities to connect around technology and product thinking.',body:'Interested in exchanging ideas? Get in touch with our team to start a conversation.'},
+];
+export const companyPages = [
+ {slug:'culture',title:'Culture',description:'Curiosity, care, and collaboration shape how we approach the work.',body:'We believe better work begins with listening, sharing ideas, and caring about the details. Our approach brings people and perspectives together around a common goal.'},
+ {slug:'team',title:'Team',description:'The people and perspectives behind thoughtful digital work.',body:'Digital products are a team effort. We bring strategy, design, and engineering together to explore challenges and build useful experiences.'},
+ {slug:'careers',title:'Join us',description:'Interested in building meaningful digital experiences together?',body:'We are always interested in meeting curious people who care about craft and collaboration. Reach out to introduce yourself and share what you love to do.'},
+ {slug:'security',title:'Security & quality',description:'A considered approach to quality throughout the product journey.',body:'Security and quality deserve attention from the beginning. We consider your product context and work to make sound decisions throughout design, development, and delivery.'},
+];
