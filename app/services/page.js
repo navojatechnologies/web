@@ -1,0 +1,6 @@
+import Link from 'next/link';
+import { ArrowUpRight } from 'lucide-react';
+import { services } from '../data';
+import { PageHero, ContactBanner } from '../components/Sections';
+export const metadata = { title: 'Services', description: 'Explore web development, app development, AI, design and product engineering services from Navoja Technolgies.' };
+export default function ServicesPage() { return <main><PageHero eyebrow="WHAT WE DO" title={<>Ideas meet <em>execution.</em></>} description="From a first spark to a product ready for the world, we bring the right mix of strategy, design, and engineering to every challenge."/><section className="section listing-section"><div className="wrap"><div className="listing-intro"><p className="eyebrow dark-label"><span className="small-square"/> OUR SERVICES</p><h2>What can we build together?</h2></div><div className="listing-grid">{services.map(s => <Link className="listing-card" key={s.slug} href={`/services/${s.slug}/`}><span className="listing-number">{s.number} /</span><ArrowUpRight className="listing-arrow" size={22}/><h3>{s.title}</h3><p>{s.text}</p><span className="listing-link">EXPLORE SERVICE <ArrowUpRight size={15}/></span></Link>)}</div></div></section><ContactBanner/></main>; }

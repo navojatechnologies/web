@@ -1,0 +1,8 @@
+import Link from 'next/link';
+import { ArrowUpRight } from 'lucide-react';
+import { notFound } from 'next/navigation';
+import { industries } from '../../data';
+import { PageHero, ContactBanner } from '../../components/Sections';
+export function generateStaticParams() { return industries.map(({slug}) => ({slug})); }
+export async function generateMetadata({params}) { const {slug} = await params; const item = industries.find(i => i.slug === slug); return {title: item?.title || 'Industry', description: item?.description}; }
+export default async function IndustryPage({params}) { const {slug} = await params; const item = industries.find(i => i.slug === slug); if (!item) notFound(); return <main><PageHero eyebrow="INDUSTRIES" title={<>{item.title}<em>.</em></>} description={item.description}/><section className="section detail-section"><div className="wrap detail-grid"><div><p className="eyebrow dark-label"><span className="small-square"/> A FRESH PERSPECTIVE</p><h2>Better experiences.<br/><span>Built with purpose.</span></h2></div><div><p className="detail-lead">Good technology begins with understanding the people who use it.</p><p className="detail-copy">We bring strategy, design, and engineering together to explore opportunities and build digital solutions around your organisation’s needs. Whether you’re starting something new or evolving an existing experience, we’re ready to listen.</p><Link className="text-link" href="/contact/">START A CONVERSATION <ArrowUpRight size={19}/></Link></div></div><div className="wrap"><Link href="/industries/" className="back-link">← ALL INDUSTRIES</Link></div></section><ContactBanner/></main>; }
