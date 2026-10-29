@@ -4,7 +4,7 @@ export const resourceContent={
   {title:'Next.js',text:'A framework for building web applications with React.',href:'https://nextjs.org/'},
   {title:'Flutter',text:'An open-source framework for building applications across platforms.',href:'https://flutter.dev/'},
   {title:'PostgreSQL',text:'An open-source relational database used for a broad range of applications.',href:'https://www.postgresql.org/'}]},
- 'products':{label:'PRODUCT DIRECTIONS',heading:'Ideas we can explore together.',description:'These are illustrative product concepts, not existing Navoja products. The scope of any solution is defined around your needs.',cards:[
+ 'products':{label:'PRODUCT CONCEPTS',heading:'Ideas we can explore together.',description:'Explore potential product directions. The scope of any solution is defined around your needs.',cards:[
   {title:'Customer portal',text:'A secure digital space for customers to access information, request support, and manage their relationship with a business.',href:'/contact/'},
   {title:'Commerce experience',text:'A storefront concept that brings product discovery, cart, checkout, and operational integrations together.',href:'/services/web-development/'},
   {title:'Mobile service app',text:'An app concept designed around repeat tasks, timely information, and a straightforward mobile journey.',href:'/services/app-development/'},
