@@ -1,0 +1,165 @@
+:root {
+  color-scheme: light;
+  --ink: #24212e;
+  --muted: #615d6d;
+  --accent: #6841bb;
+  --line: #e7e3ed;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--ink);
+  background: #fff;
+  scroll-behavior: smooth;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-size: 16px; line-height: 1.75; }
+a { color: var(--accent); text-underline-offset: 4px; }
+a:hover { color: #44247f; }
+a:focus-visible, [tabindex]:focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; border-radius: 2px; }
+::selection { background: #e8dcff; color: #24212e; }
+.shell { width: min(1180px, calc(100% - 80px)); margin-inline: auto; }
+.skip-link { position: absolute; top: 12px; left: 12px; z-index: 10; padding: 10px 18px; background: #fff; transform: translateY(-200%); }
+.skip-link:focus { transform: translateY(0); }
+.product-header { border-bottom: 1px solid #eeecf2; background: #fff; }
+.product-bar { min-height: 106px; display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+.product-brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: var(--ink); }
+.product-mark { display: grid; place-items: center; flex-shrink: 0; width: 50px; height: 50px; background: #292135; color: #e0cfff; border: 1px solid #43324f; border-radius: 15px; box-shadow: 0 3px 6px #21172d0d; }
+.product-mark svg { width: 28px; height: 28px; }
+.product-name { display: block; font-size: 20px; font-weight: 800; letter-spacing: 2.5px; line-height: 1.25; }
+.product-tagline { display: block; margin-top: 6px; font-size: 11px; color: var(--muted); letter-spacing: .15px; }
+.company-link { display: flex; align-items: center; gap: 18px; color: #3e354c; font-size: 13px; font-weight: 600; text-decoration: none; }
+.company-name { display: block; }
+.company-caption { display: block; margin-bottom: 3px; color: var(--muted); font-size: 8px; font-weight: 600; letter-spacing: 1.6px; }
+.company-arrow { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 50%; font-size: 17px; }
+.company-link:hover .company-arrow { border-color: #b2a0c8; background: #f6f3fa; }
+.policy-hero { padding-block: 75px 48px; border-bottom: 1px solid var(--line); }
+.policy-intro { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 258px; align-items: center; gap: 50px; margin-top: 42px; padding: 58px 54px; border: 1px solid #e8e2ef; border-radius: 24px; background: #f8f6fb; box-shadow: inset 0 1px 0 #fff; }
+.hero-copy { min-width: 0; }
+.eyebrow { margin: 0 0 18px; font-size: 11px; font-weight: 750; color: var(--accent); letter-spacing: 2px; }
+.policy-intro .eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 26px; color: #69557e; font-size: 10px; letter-spacing: 2.2px; }
+.policy-intro .eyebrow span { width: 25px; height: 1px; background: #9a7fbb; }
+h1, h2, h3 { font-family: Manrope, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; color: var(--ink); }
+h1 { margin: 0; font-size: clamp(42px, 6vw, 72px); font-weight: 650; line-height: 1.15; letter-spacing: -3px; }
+h1 > span { color: #9772d7; }
+.policy-intro h1 { font-size: clamp(48px, 5.5vw, 78px); font-weight: 550; line-height: 1.08; letter-spacing: -3.5px; }
+.policy-intro h1 em { font-family: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', Palatino, Georgia, serif; font-weight: 400; color: #6d508c; }
+.hero-description { max-width: 610px; margin: 23px 0 29px; font-size: 18px; color: var(--muted); line-height: 1.7; }
+.policy-intro .hero-description { max-width: 490px; margin: 23px 0 0; font-size: 16px; line-height: 1.85; color: #645c70; }
+.policy-dates { display: grid; gap: 14px; margin: 0; }
+.date-card { padding: 21px 24px; border: 1px solid #e6dfed; border-radius: 13px; background: #ffffffbf; box-shadow: 0 2px 3px #39294f03; }
+.policy-dates dt { display: flex; align-items: center; gap: 9px; margin: 0 0 10px; color: #766780; font-size: 11px; font-weight: 500; letter-spacing: .2px; }
+.policy-dates dt svg { flex-shrink: 0; width: 16px; height: 16px; stroke: #8b709e; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.policy-dates dd { margin: 0; color: #3d2f4c; font-size: 15px; font-weight: 600; letter-spacing: -.2px; font-variant-numeric: tabular-nums; }
+.attribution { margin: 31px 0 0; font-size: 11px; color: #706479; }
+.attribution a { color: #4f405f; text-decoration-color: #c3b4d0; }
+.policy-layout { display: grid; grid-template-columns: 260px minmax(0, 1fr); align-items: start; gap: 72px; padding-block: 54px 30px; }
+.contents { position: sticky; top: 24px; max-height: calc(100dvh - 48px); overflow-y: auto; padding-right: 18px; scrollbar-width: thin; }
+.contents h2 { margin: 0 0 20px; font-size: 12px; text-transform: uppercase; letter-spacing: 1.4px; }
+.contents ol { margin: 0; padding-left: 25px; }
+.contents li { padding-left: 6px; margin: 0 0 11px; color: #706779; font-size: 12px; line-height: 1.6; }
+.contents li::marker { font-size: 11px; font-variant-numeric: tabular-nums; }
+.contents a { text-decoration: none; color: #61596e; }
+.contents li a:hover { color: var(--accent); text-decoration: underline; }
+.contents-contact { display: block; border-top: 1px solid var(--line); margin-top: 25px; padding-block: 20px 8px; font-size: 12px; }
+.contents-contact span { display: block; margin-top: 4px; color: var(--accent); overflow-wrap: anywhere; }
+.policy-content { min-width: 0; max-width: 760px; }
+.policy-content section { padding-bottom: 34px; margin-bottom: 34px; border-bottom: 1px solid var(--line); scroll-margin-top: 30px; }
+.policy-content section:last-child { margin-bottom: 0; border-bottom: 0; }
+.policy-content h2 { display: flex; gap: 15px; align-items: baseline; margin: 0 0 23px; font-size: 25px; font-weight: 650; line-height: 1.45; letter-spacing: -.6px; }
+.section-number { flex-shrink: 0; color: var(--accent); font-size: 12px; font-weight: 650; letter-spacing: 0; font-variant-numeric: tabular-nums; }
+.policy-content h3 { margin: 29px 0 13px; font-size: 18px; font-weight: 650; line-height: 1.5; letter-spacing: -.25px; }
+.policy-content p { margin: 0 0 17px; color: #514c5c; }
+.policy-content strong { font-weight: 650; color: #312a40; }
+.policy-content ul, .policy-content ol { padding-left: 24px; margin: 0 0 22px; color: #514c5c; }
+.policy-content li { padding-left: 5px; margin-bottom: 7px; }
+.policy-content li::marker { color: #786d8a; }
+.policy-content a { overflow-wrap: anywhere; }
+.contact-card { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; border: 1px solid var(--line); background: #faf9fc; border-radius: 16px; padding: 38px 40px; margin-block: 20px 54px; }
+.contact-card h2 { font-size: 27px; line-height: 1.3; font-weight: 650; letter-spacing: -.8px; margin: 0 0 14px; }
+.contact-card p:not(.eyebrow) { max-width: 370px; color: var(--muted); font-size: 14px; margin: 0; }
+.contact-card .eyebrow { font-size: 10px; margin-bottom: 15px; }
+.contact-card dl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 25px 30px; margin: 0; }
+.contact-card dt { color: var(--muted); font-size: 11px; margin-bottom: 5px; }
+.contact-card dd { margin: 0; font-size: 13px; font-weight: 600; overflow-wrap: anywhere; }
+.product-footer { display: flex; justify-content: space-between; gap: 30px; padding-block: 25px 35px; border-top: 1px solid var(--line); font-size: 11px; color: var(--muted); }
+.product-footer p { margin: 0 0 4px; }
+.product-footer > div:last-child { display: flex; align-items: flex-start; gap: 25px; }
+.product-footer a { text-decoration: none; }
+@media (max-width: 1000px) {
+  .policy-intro { grid-template-columns: minmax(0, 1fr) 222px; gap: 30px; padding: 42px 36px; }
+  .policy-intro h1 { font-size: 59px; }
+  .date-card { padding: 20px; }
+  .policy-layout { grid-template-columns: 220px minmax(0, 1fr); gap: 40px; }
+  .contact-card { gap: 30px; padding: 30px; }
+  .contact-card dl { column-gap: 20px; }
+}
+@media (max-width: 760px) {
+  .shell { width: calc(100% - 40px); }
+  .product-bar { min-height: 88px; }
+  .company-link { gap: 10px; font-size: 11px; line-height: 1.5; text-align: right; }
+  .company-caption { font-size: 7px; letter-spacing: 1px; }
+  .company-arrow { width: 28px; height: 28px; font-size: 15px; }
+  .product-mark { width: 40px; height: 40px; border-radius: 10px; }
+  .product-brand { gap: 10px; }
+  .product-name { font-size: 18px; }
+  .product-tagline { font-size: 10px; }
+  .policy-hero { padding-block: 45px 32px; }
+  .policy-intro { grid-template-columns: minmax(0, 1fr); gap: 30px; margin-top: 26px; padding: 36px 30px 30px; border-radius: 19px; }
+  .policy-intro h1 { font-size: clamp(43px, 8vw, 64px); letter-spacing: -2.5px; }
+  .policy-intro .eyebrow { margin-bottom: 22px; font-size: 9px; }
+  .policy-intro .hero-description { margin-top: 18px; font-size: 15px; }
+  h1 { letter-spacing: -2px; }
+  .hero-description { font-size: 16px; }
+  .policy-dates { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .date-card { padding: 16px; }
+  .policy-dates dt { font-size: 10px; gap: 7px; }
+  .policy-dates dd { font-size: 13px; }
+  .attribution { margin-top: 23px; }
+  .policy-layout { display: block; padding-top: 30px; }
+  .contents { position: static; max-height: none; padding: 22px; border: 1px solid var(--line); border-radius: 12px; background: #faf9fc; margin-bottom: 40px; }
+  .contents ol { columns: 2; column-gap: 30px; }
+  .contents li { break-inside: avoid; font-size: 11px; margin-bottom: 12px; }
+  .contents-contact { margin-top: 18px; padding-bottom: 0; }
+  .policy-content h2 { font-size: 22px; gap: 12px; }
+  .policy-content h3 { font-size: 17px; }
+  .policy-content { font-size: 15px; }
+  .contact-card { grid-template-columns: minmax(0, 1fr); padding: 26px; gap: 25px; margin-bottom: 35px; }
+  .contact-card h2 { font-size: 25px; }
+  .product-footer { flex-direction: column; gap: 20px; }
+  .product-footer > div:last-child { flex-wrap: wrap; }
+}
+@media (max-width: 480px) {
+  .company-link { max-width: 85px; font-size: 10px; }
+  .company-caption, .company-arrow { display: none; }
+  .product-name { font-size: 17px; letter-spacing: 2px; }
+  .policy-intro { padding: 30px 22px 24px; gap: 26px; }
+  .policy-intro h1 { font-size: clamp(42px, 11vw, 51px); letter-spacing: -2px; }
+  .policy-dates { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .date-card { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 15px; }
+  .policy-dates dt { margin-bottom: 0; }
+  .policy-dates dd { font-size: 12px; }
+}
+@media (max-width: 380px) {
+  .shell { width: calc(100% - 32px); }
+  .contents ol { columns: 1; }
+  .product-brand { gap: 7px; }
+  .product-mark { width: 32px; height: 36px; }
+  .product-tagline { font-size: 9px; }
+  .contact-card { padding: 22px; }
+  .contact-card dl { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) { :root { scroll-behavior: auto; } }
+@media print {
+  :root { font-family: sans-serif; }
+  .shell { width: 100%; }
+  .contents, .skip-link, .company-link, .product-footer > div:last-child { display: none; }
+  .product-bar { min-height: 70px; }
+  .policy-hero { padding-block: 25px; }
+  .policy-intro { display: block; margin-top: 0; padding: 25px; background: #fff; border-radius: 0; box-shadow: none; }
+  .policy-intro h1 { font-size: 48px; }
+  .policy-dates { display: flex; gap: 20px; margin-top: 25px; }
+  .date-card { padding: 12px; }
+  .policy-layout { display: block; }
+  .policy-content { max-width: none; }
+  .policy-content section { padding-bottom: 20px; margin-bottom: 20px; }
+  h2, h3 { break-after: avoid; }
+  .contact-card { break-inside: avoid; }
+}
