@@ -23,7 +23,9 @@ export function createPreviewServer() {
       // let verification cover corporate and other hostnames too.
       const hostname = ['localhost', '127.0.0.1'].includes(host) ? 'doxibox.navojatech.com' : host;
       const route = matchRoute(url.pathname, hostname);
-      const destination = route?.dest || decodeURIComponent(url.pathname);
+      const destination = route
+        ? url.pathname.replace(new RegExp(route.src), route.dest)
+        : decodeURIComponent(url.pathname);
       let file = path.resolve(directory, `.${destination}`);
       if (file !== directory && !file.startsWith(directory + path.sep)) {
         response.writeHead(404).end();
@@ -43,8 +45,8 @@ export function createPreviewServer() {
         '.json': 'application/json', '.jpg': 'image/jpeg', '.png': 'image/png',
         '.svg': 'image/svg+xml', '.woff2': 'font/woff2',
       };
-      const contentType = destination === '/doxibox/policy'
-        ? 'text/html; charset=utf-8' : contentTypes[path.extname(file)] || 'application/octet-stream';
+      const contentType = /^\/doxibox\/(home|features|about|faq|contact|policy)$/.test(destination)
+        ? 'text/html; charset=utf-8' : contentTypes[path.extname(file)] || (path.extname(file) === '.xml' ? 'application/xml; charset=utf-8' : 'application/octet-stream');
       const content = await readFile(file);
       response.writeHead(status, { 'Content-Type': contentType, ...route?.headers });
       response.end(request.method === 'HEAD' ? undefined : content);
@@ -55,9 +57,9 @@ export function createPreviewServer() {
 }
 
 if (process.argv[1] && pathToFileURL(path.resolve(process.argv[1])).href === import.meta.url) {
-  const port = Number(process.env.POLICY_PREVIEW_PORT || 4173);
+  const port = Number(process.env.DOXIBOX_PREVIEW_PORT || process.env.POLICY_PREVIEW_PORT || 4173);
   createPreviewServer().listen(port, '127.0.0.1', () => {
-    console.log(`Doxibox policy preview: http://localhost:${port}/policy`);
+    console.log(`Doxibox website preview: http://localhost:${port}`);
     console.log('Local hostname-rule approximation; no production services are changed.');
   });
 }

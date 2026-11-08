@@ -1,5 +1,7 @@
 # Doxibox privacy policy: implementation and deployment
 
+> Historical policy-only implementation record. The current marketing website adds the homepage, features, about, FAQ, contact and sitemap routes while preserving this policy. Follow [Doxibox website](doxibox-website.md) for the current file inventory, routing, tests and release instructions. The subdomain is already connected; the domain/DNS setup steps below describe the earlier setup and are not required for this update.
+
 Target public URL: **https://doxibox.navojatech.com/policy**.
 
 The implementation is complete locally. No deployment, Vercel domain settings, DNS records, or production resources have been changed. Production changes require the owner's approval.

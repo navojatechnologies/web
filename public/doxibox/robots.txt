@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://doxibox.navojatech.com/sitemap.xml
