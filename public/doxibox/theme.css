@@ -1,0 +1,42 @@
+/* Doxibox app palette. Dark is the default, independent of device preferences. */
+:root {
+  color-scheme: dark;
+  --page: #101413;
+  --surface: #191e1c;
+  --surface-secondary: #222925;
+  --primary: #00a976;
+  --primary-bg: #103e30;
+  --ink: #f1f6f3;
+  --muted: #a4b2aa;
+  --line: #2d3731;
+  --error: #f58c86;
+  --on-primary: #03271b;
+  --gold: #d8a44d;
+  --gold-bg: #32291b;
+  --primary-hover: #20c28e;
+  --shadow: #00000030;
+  --glow: #00a97620;
+  /* Aliases for the existing marketing and legal layouts. */
+  --secondary: var(--primary);
+  --accent: var(--primary);
+  --light: var(--surface);
+  --dark: var(--page);
+}
+::selection { background: var(--primary); color: var(--on-primary); }
+/* Keep long legal documents readable and economical to print. */
+@media print {
+  :root {
+    color-scheme: light;
+    --page: #f5f8f6;
+    --surface: #ffffff;
+    --surface-secondary: #edf3ef;
+    --primary: #007d59;
+    --primary-bg: #ddf4e9;
+    --ink: #17241d;
+    --muted: #68766d;
+    --line: #e1e9e4;
+    --error: #b8443d;
+    --shadow: transparent;
+    --glow: transparent;
+  }
+}

@@ -6,9 +6,13 @@ import { createPreviewServer } from './preview-doxibox.mjs';
 import { renderPolicy } from '../app/doxibox/policy-document.mjs';
 import { policyConfig } from '../app/doxibox/policy-config.mjs';
 import { pages, siteConfig } from '../app/doxibox/site-config.mjs';
+import { renderTerms } from '../app/doxibox/terms-document.mjs';
+import { termsConfig } from '../app/doxibox/terms-config.mjs';
 
 const content = await readFile(new URL('../content/doxibox/privacy-policy.md', import.meta.url), 'utf8');
 const html = await readFile(new URL('../out/doxibox/policy', import.meta.url), 'utf8');
+const termsContent = await readFile(new URL('../content/doxibox/terms-and-conditions.md', import.meta.url), 'utf8');
+const termsHtml = await readFile(new URL('../out/doxibox/terms', import.meta.url), 'utf8');
 const server = createPreviewServer();
 let origin;
 before(async () => {
@@ -69,7 +73,7 @@ test('HTML metadata, emails, anchors and account deletion contact are correct', 
   for (const [, href] of html.matchAll(/href="([^"]+)"/g)) {
     if (href.startsWith('#')) assert.ok(ids.includes(href.slice(1)), `Broken anchor: ${href}`);
     else assert.ok([
-      '/doxibox/policy.css', policyConfig.canonicalUrl, policyConfig.companyUrl,
+      '/doxibox/theme.css', '/doxibox/policy.css', policyConfig.canonicalUrl, policyConfig.companyUrl,
       'https://policies.google.com/privacy', `mailto:${policyConfig.privacyEmail}`,
       `mailto:${policyConfig.supportEmail}`, 'data:,',
     ].includes(href), `Unexpected link: ${href}`);
@@ -89,7 +93,7 @@ test('Doxibox policy serves HTML without login, redirects or JavaScript', async 
 });
 
 test('Doxibox unknown paths return real 404s even when corporate routes exist', async () => {
-  for (const pathname of ['/services/', '/terms', '/account-deletion', '/doxibox/policy', '/not-found', '/policy/missing', '/features/missing', '/doxibox/robots.txt', '/doxibox/site.css/missing']) {
+  for (const pathname of ['/services/', '/account-deletion', '/doxibox/policy', '/doxibox/terms', '/not-found', '/policy/missing', '/terms/missing', '/features/missing', '/doxibox/robots.txt', '/doxibox/site.css/missing']) {
     const response = await request(pathname);
     assert.equal(response.status, 404, pathname);
     assert.equal(response.headers.get('x-robots-tag'), 'noindex, follow');
@@ -106,6 +110,7 @@ test('corporate hosts retain their exported routes and original missing policy p
       assert.equal(await response.text(), await readFile(new URL(`../out/${file}`, import.meta.url), 'utf8'));
     }
     assert.equal((await request('/policy', hostname)).status, 404);
+    assert.equal((await request('/terms', hostname)).status, 404);
   }
 });
 
@@ -137,11 +142,13 @@ test('all marketing routes serve distinct complete documents on the Doxibox host
       assert.ok(document.includes(`<meta property="og:url" content="${siteConfig.origin}${page.path}">`));
       assert.ok(document.includes('name="twitter:card" content="summary_large_image"'));
       assert.ok(document.includes('href="https://doxibox.navojatech.com/policy"'));
+      assert.ok(document.includes(`href="${termsConfig.canonicalUrl}">Terms and Conditions</a>`));
       assert.ok(!/<form\b|href="(?:#|javascript:|\/login|\/signup|\/terms|\/account-deletion)"/.test(document));
       assert.ok(!document.includes('/_next/'), 'Marketing pages must not load corporate React bundles');
       if (['home', 'features', 'about'].includes(key)) {
-        assert.ok(document.includes('disabled>Get Started<span class="soon">Coming soon</span>'));
+        assert.ok(document.includes('class="button light" href="/contact">Contact Support'));
       }
+      assert.ok(!/Coming soon|coming soon|<button\b/.test(document), 'Marketing actions must use working links');
       titles.add(document.match(/<title>(.*?)<\/title>/)[1]);
       const ids = [...document.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
       assert.equal(new Set(ids).size, ids.length, 'Element IDs must be unique');
@@ -167,11 +174,11 @@ test('sitemap, branded assets and native FAQ content are available', async () =>
   assert.equal(sitemap.status, 200);
   assert.match(sitemap.headers.get('content-type'), /^application\/xml/);
   const xml = await sitemap.text();
-  assert.equal((xml.match(/<loc>/g) || []).length, 6);
-  for (const pathname of [...Object.values(pages).map(page => page.path), '/policy']) {
+  assert.equal((xml.match(/<loc>/g) || []).length, 7);
+  for (const pathname of [...Object.values(pages).map(page => page.path), '/policy', '/terms']) {
     assert.ok(xml.includes(`<loc>${siteConfig.origin}${pathname}</loc>`));
   }
-  for (const [asset, type] of [['site.css','text/css'], ['site.js','text/javascript'], ['favicon.svg','image/svg+xml'], ['social-card.png','image/png']]) {
+  for (const [asset, type] of [['theme.css','text/css'], ['site.css','text/css'], ['terms.css','text/css'], ['site.js','text/javascript'], ['favicon.svg','image/svg+xml'], ['social-card.png','image/png']]) {
     const response = await request(`/doxibox/${asset}`);
     assert.equal(response.status, 200, asset);
     assert.ok(response.headers.get('content-type').startsWith(type));
@@ -181,4 +188,60 @@ test('sitemap, branded assets and native FAQ content are available', async () =>
   const home = await (await request('/')).text();
   assert.equal((home.match(/class="feature-card"/g) || []).length, 6);
   assert.equal((home.match(/class="faq-item"/g) || []).length, 9);
+});
+
+test('Terms export preserves every source line, all 26 sections and all subsections', () => {
+  assert.equal(termsHtml, renderTerms(termsContent));
+  assert.equal((termsHtml.match(/<section id="section-/g) || []).length, 26);
+  assert.equal((termsHtml.match(/<h3>/g) || []).length, (termsContent.match(/^### /gm) || []).length);
+  const text = plainText(termsHtml);
+  for (const line of termsContent.split('\n')) {
+    if (!line.trim() || /^# Terms/.test(line) || /^(Effective Date|Last Updated):/.test(line)) continue;
+    const expected = line.replace(/^#{2,3} (?:\d+\. )?/, '').replace(/^(?:- |\d+\. )/, '')
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/\*\*/g, '').replace(/\s+/g, ' ').trim();
+    assert.ok(text.includes(expected), `Missing Terms content: ${expected}`);
+  }
+  assert.ok(text.includes('Grievance Officer name — to be provided'));
+  assert.ok(text.includes('Registered business address — to be provided'));
+  assert.ok(!/JB Vanani|Platinum Heights|<form\b|account-deletion|mailto\\:/.test(termsHtml));
+  assert.ok(text.includes('Doxibox is a product of Navoja Technologies.'));
+  assert.equal((termsHtml.match(/7 November 2026/g) || []).length, 2);
+});
+
+test('Terms SEO, heading hierarchy, section navigation and destinations are correct', async () => {
+  assert.ok(termsHtml.includes(`<title>${termsConfig.title}</title>`));
+  assert.ok(termsHtml.includes(`<meta name="description" content="${termsConfig.description}">`));
+  assert.ok(termsHtml.includes(`<link rel="canonical" href="${termsConfig.canonicalUrl}">`));
+  assert.ok(termsHtml.includes(`<meta property="og:url" content="${termsConfig.canonicalUrl}">`));
+  assert.equal((termsHtml.match(/<h1[ >]/g) || []).length, 1);
+  assert.equal((termsHtml.match(/<li><a href="#section-/g) || []).length, 26);
+  const ids = [...termsHtml.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
+  assert.equal(new Set(ids).size, ids.length);
+  for (const [, href] of termsHtml.matchAll(/(?:href|src)="([^"]+)"/g)) {
+    if (href.startsWith('#')) assert.ok(ids.includes(href.slice(1)), `Broken Terms anchor ${href}`);
+    else {
+      const url = new URL(href, siteConfig.origin);
+      if (url.origin === siteConfig.origin) assert.equal((await request(url.pathname)).status, 200, href);
+      else assert.ok([siteConfig.companyUrl, `mailto:${siteConfig.privacyEmail}`, `mailto:${siteConfig.supportEmail}`].includes(href), `Unexpected Terms link ${href}`);
+    }
+  }
+  for (const email of [siteConfig.privacyEmail, siteConfig.supportEmail]) assert.ok(termsHtml.includes(`href="mailto:${email}"`));
+  assert.ok(termsHtml.includes('href="https://doxibox.navojatech.com/policy"'));
+});
+
+test('Terms is public HTML on both URL forms, including HEAD and query requests', async () => {
+  for (const pathname of ['/terms', '/terms/', '/terms?review=legal']) {
+    const response = await request(pathname);
+    assert.equal(response.status, 200, pathname);
+    assert.match(response.headers.get('content-type'), /^text\/html/);
+    assert.equal(response.headers.get('location'), null);
+    assert.equal(await response.text(), termsHtml);
+  }
+  assert.equal((await request('/terms', 'doxibox.navojatech.com', 'HEAD')).status, 200);
+});
+
+test('Terms refuses missing sections, missing dates and unsafe links', () => {
+  assert.throws(() => renderTerms(termsContent.replace('## 26.', '## 27.')), /all 26 sections/);
+  assert.throws(() => renderTerms(termsContent.replace('Last Updated:', 'Updated:')), /both dates/);
+  assert.throws(() => renderTerms(termsContent.replace('mailto:info@navojatech.com', 'javascript:alert')), /Unsupported Terms link protocol/);
 });

@@ -3,8 +3,7 @@
 export const siteConfig = {
   origin: 'https://doxibox.navojatech.com',
   companyUrl: 'https://navojatech.com',
-  appUrl: '',
-  termsUrl: '',
+  termsUrl: 'https://doxibox.navojatech.com/terms',
   privacyEmail: 'info@navojatech.com',
   supportEmail: 'support@navojatech.com',
 };

@@ -20,7 +20,13 @@
       "headers": { "Content-Type": "text/html; charset=utf-8" }
     },
     {
-      "src": "^/doxibox/(policy\\.css|site\\.css|site\\.js|favicon\\.svg|social-card\\.png)$",
+      "src": "^/terms/?$",
+      "has": [{ "type": "host", "value": "doxibox.navojatech.com" }],
+      "dest": "/doxibox/terms",
+      "headers": { "Content-Type": "text/html; charset=utf-8" }
+    },
+    {
+      "src": "^/doxibox/(theme\\.css|policy\\.css|site\\.css|site\\.js|terms\\.css|favicon\\.svg|social-card\\.png)$",
       "has": [{ "type": "host", "value": "doxibox.navojatech.com" }],
       "dest": "/doxibox/$1"
     },

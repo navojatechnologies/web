@@ -45,7 +45,7 @@ export function createPreviewServer() {
         '.json': 'application/json', '.jpg': 'image/jpeg', '.png': 'image/png',
         '.svg': 'image/svg+xml', '.woff2': 'font/woff2',
       };
-      const contentType = /^\/doxibox\/(home|features|about|faq|contact|policy)$/.test(destination)
+      const contentType = /^\/doxibox\/(home|features|about|faq|contact|policy|terms)$/.test(destination)
         ? 'text/html; charset=utf-8' : contentTypes[path.extname(file)] || (path.extname(file) === '.xml' ? 'application/xml; charset=utf-8' : 'application/octet-stream');
       const content = await readFile(file);
       response.writeHead(status, { 'Content-Type': contentType, ...route?.headers });

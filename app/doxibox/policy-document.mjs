@@ -58,13 +58,14 @@ export function renderPolicy(markdown) {
   <title>${escapeHtml(config.title)}</title>
   <meta name="description" content="${escapeHtml(config.description)}">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#faf9fc">
+  <meta name="theme-color" content="#101413">
   <link rel="canonical" href="${escapeHtml(config.canonicalUrl)}">
   <meta property="og:type" content="website">
   <meta property="og:title" content="${escapeHtml(config.title)}">
   <meta property="og:description" content="${escapeHtml(config.description)}">
   <meta property="og:url" content="${escapeHtml(config.canonicalUrl)}">
   <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/doxibox/theme.css">
   <link rel="stylesheet" href="/doxibox/policy.css">
 </head>
 <body id="top">

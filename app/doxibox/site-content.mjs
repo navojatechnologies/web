@@ -16,7 +16,7 @@ export const steps = [
 
 export const faqs = [
   ['What is Doxibox?', 'Doxibox is a cloud-based file storage, management and sharing platform developed and operated by Navoja Technologies. It brings your supported digital files together in one place.'],
-  ['How does Doxibox cloud storage work?', 'The product is designed to let you create an account, upload supported files, organize your content and use available sharing features. Public app access from this website is coming soon; contact support for current availability.'],
+  ['How does Doxibox cloud storage work?', 'The product is designed to let you create an account, upload supported files, organize your content and use available sharing features. Contact support for details about current app access and availability.'],
   ['Which file formats are supported?', 'Doxibox is designed for documents, photos, videos, audio, archives and other supported files. Accepted formats, upload limits, previews and playback depend on the app. Contact support for the current details.'],
   ['Can I share files with other users?', 'You can share selected content using supported links or permissions where available. A functioning public link may allow anyone who obtains it to access the selected content. Check the available sharing settings before sending a link.'],
   ['Are my files private?', 'Personal storage is private by default unless you change your sharing or visibility settings. Content you share through public links or publish to public channels may be accessible to others. Read our <a href="https://doxibox.navojatech.com/policy">Privacy Policy</a> for details.'],
