@@ -23,6 +23,10 @@ export function createPreviewServer() {
       // let verification cover corporate and other hostnames too.
       const hostname = ['localhost', '127.0.0.1'].includes(host) ? 'doxibox.navojatech.com' : host;
       const route = matchRoute(url.pathname, hostname);
+      if (route?.status >= 300 && route.status < 400 && route.headers?.Location) {
+        response.writeHead(route.status, route.headers).end();
+        return;
+      }
       const destination = route
         ? url.pathname.replace(new RegExp(route.src), route.dest)
         : decodeURIComponent(url.pathname);

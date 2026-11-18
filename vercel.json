@@ -2,6 +2,24 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "routes": [
     {
+      "src": "^/\\.well-known/assetlinks\\.json$",
+      "has": [{ "type": "host", "value": "doxibox.navojatech.com" }],
+      "dest": "/doxibox/assetlinks.json",
+      "headers": { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "public, max-age=300" }
+    },
+    {
+      "src": "^/[a-fA-F0-9]{24}/?$",
+      "has": [{ "type": "host", "value": "doxibox.navojatech.com" }],
+      "status": 302,
+      "headers": { "Location": "https://play.google.com/store/apps/details?id=com.doxibox", "Cache-Control": "no-store" }
+    },
+    {
+      "src": "^/drama/[a-fA-F0-9]{24}(/[^/]+)?/?$",
+      "has": [{ "type": "host", "value": "doxibox.navojatech.com" }],
+      "status": 302,
+      "headers": { "Location": "https://play.google.com/store/apps/details?id=com.doxibox", "Cache-Control": "no-store" }
+    },
+    {
       "src": "^/$",
       "has": [{ "type": "host", "value": "doxibox.navojatech.com" }],
       "dest": "/doxibox/home",

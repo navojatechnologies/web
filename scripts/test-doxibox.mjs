@@ -245,3 +245,30 @@ test('Terms refuses missing sections, missing dates and unsafe links', () => {
   assert.throws(() => renderTerms(termsContent.replace('Last Updated:', 'Updated:')), /both dates/);
   assert.throws(() => renderTerms(termsContent.replace('mailto:info@navojatech.com', 'javascript:alert')), /Unsupported Terms link protocol/);
 });
+
+test('Android association file is JSON with no redirect on the Doxibox host', async () => {
+  const response = await request('/.well-known/assetlinks.json');
+  assert.equal(response.status, 200);
+  assert.match(response.headers.get('content-type'), /^application\/json/);
+  assert.equal(response.headers.get('location'), null);
+  const statements = JSON.parse(await response.text());
+  assert.ok(Array.isArray(statements));
+  for (const statement of statements) {
+    assert.equal(statement.target.package_name, 'com.doxibox');
+    assert.ok(statement.target.sha256_cert_fingerprints.every(value => /^(?:[0-9A-F]{2}:){31}[0-9A-F]{2}$/.test(value)));
+  }
+});
+
+test('only Doxibox file and drama share URLs redirect browsers to Play Store', async () => {
+  const id = '6aec817275a0cec922cd8d49';
+  for (const pathname of [`/${id}`, `/${id}/`, `/drama/${id}`, `/drama/${id}/My%20Series`]) {
+    const response = await request(pathname);
+    assert.equal(response.status, 302, pathname);
+    assert.equal(response.headers.get('location'), 'https://play.google.com/store/apps/details?id=com.doxibox');
+  }
+  for (const pathname of ['/abc', '/drama/not-an-id/title', `/${id}/extra`, `/drama/${id}/title/extra`]) {
+    assert.equal((await request(pathname)).status, 404, pathname);
+  }
+  const corporate = await request(`/${id}`, 'navojatech.com');
+  assert.notEqual(corporate.status, 302);
+});
