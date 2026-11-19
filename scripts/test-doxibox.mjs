@@ -73,7 +73,7 @@ test('HTML metadata, emails, anchors and account deletion contact are correct', 
   for (const [, href] of html.matchAll(/href="([^"]+)"/g)) {
     if (href.startsWith('#')) assert.ok(ids.includes(href.slice(1)), `Broken anchor: ${href}`);
     else assert.ok([
-      '/doxibox/theme.css', '/doxibox/policy.css', policyConfig.canonicalUrl, policyConfig.companyUrl,
+      '/doxibox/theme.css', '/doxibox/policy.css', '/doxibox/favicon.svg', policyConfig.canonicalUrl, policyConfig.companyUrl,
       'https://policies.google.com/privacy', `mailto:${policyConfig.privacyEmail}`,
       `mailto:${policyConfig.supportEmail}`, 'data:,',
     ].includes(href), `Unexpected link: ${href}`);

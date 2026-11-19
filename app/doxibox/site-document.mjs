@@ -14,7 +14,7 @@ function destination(value) {
 }
 
 function logo() {
-  return `<a href="/" class="brand" aria-label="Doxibox home"><span class="brand-mark">${brandMark()}</span><span>doxibox<span class="brand-dot">.</span></span></a>`;
+  return `<a href="/" class="brand" aria-label="Doxibox home"><span class="brand-mark">${brandMark()}</span><span class="brand-wordmark">Doxibox<span class="brand-dot">.</span></span></a>`;
 }
 
 export function header(page) {

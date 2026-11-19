@@ -22,7 +22,7 @@ export function icon(name, className = '') {
   return `<svg class="icon ${className}" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${paths[name] || paths.file}</svg>`;
 }
 
-// Continues the original layered-storage mark used by the existing policy.
+// The app's launcher artwork, also used as the site's favicon.
 export function brandMark() {
-  return '<svg aria-hidden="true" viewBox="0 0 32 32" fill="none"><path d="m16 4 12 7-12 7L4 11l12-7Z" fill="currentColor" fill-opacity=".17"/><path d="m16 4 12 7-12 7L4 11l12-7ZM4 16.5 16 24l12-7.5M4 22l12 7 12-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  return '<img src="/doxibox/favicon.svg" alt="" aria-hidden="true">';
 }

@@ -1,4 +1,5 @@
 import { policyConfig as config } from './policy-config.mjs';
+import { brandMark } from './site-icons.mjs';
 
 function escapeHtml(value) {
   return value.replace(/[&<>"']/g, character => ({
@@ -64,7 +65,7 @@ export function renderPolicy(markdown) {
   <meta property="og:title" content="${escapeHtml(config.title)}">
   <meta property="og:description" content="${escapeHtml(config.description)}">
   <meta property="og:url" content="${escapeHtml(config.canonicalUrl)}">
-  <link rel="icon" href="data:,">
+  <link rel="icon" type="image/svg+xml" href="/doxibox/favicon.svg">
   <link rel="stylesheet" href="/doxibox/theme.css">
   <link rel="stylesheet" href="/doxibox/policy.css">
 </head>
@@ -73,8 +74,8 @@ export function renderPolicy(markdown) {
   <header class="product-header">
     <div class="shell product-bar">
       <a class="product-brand" href="${escapeHtml(config.canonicalUrl)}" aria-label="Doxibox privacy policy">
-        <span class="product-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="m16 4 12 7-12 7L4 11l12-7Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M4 16.5 16 24l12-7.5M4 22l12 7 12-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <span><span class="product-name">DOXIBOX</span><span class="product-tagline">Cloud Storage &amp; File Sharing</span></span>
+        <span class="product-mark" aria-hidden="true">${brandMark()}</span>
+        <span><span class="product-name">Doxibox</span><span class="product-tagline">Cloud Storage &amp; File Sharing</span></span>
       </a>
       <a class="company-link" href="${escapeHtml(config.companyUrl)}"><span class="company-name"><span class="company-caption">A PRODUCT OF</span>Navoja Technologies</span><span class="company-arrow" aria-hidden="true">↗</span></a>
     </div>
